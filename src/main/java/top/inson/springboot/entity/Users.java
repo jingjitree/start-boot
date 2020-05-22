@@ -2,11 +2,14 @@ package top.inson.springboot.entity;
 
 
 import com.baomidou.mybatisplus.annotation.TableName;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
+@Getter
+@Setter
 @TableName(value = "users")
 public class Users extends BaseEntity<Users> implements java.io.Serializable{
+    private static final long serialVersionUID = -5780832935531175109L;
 
     private String username;
     private String account;
