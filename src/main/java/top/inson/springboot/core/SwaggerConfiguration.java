@@ -1,10 +1,12 @@
 package top.inson.springboot.core;
 
+import com.google.common.base.Predicates;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
 import org.springframework.core.env.Profiles;
+import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
@@ -33,6 +35,8 @@ public class SwaggerConfiguration {
                 .apis(RequestHandlerSelectors.any())
                 //过滤什么路径下的接口
                 //.paths(PathSelectors.ant("/path/**"))
+                //不显示错误的接口地址 basic-error-controller
+                .paths(Predicates.not(PathSelectors.regex("/error.*")))
                 .build();
     }
 
