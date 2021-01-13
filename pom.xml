@@ -9,7 +9,7 @@
     <version>1.0-SNAPSHOT</version>
     <packaging>war</packaging>
 
-    <name>start_boot</name>
+    <name>start-boot</name>
     <url>http://www.example.com</url>
 
     <parent>
@@ -18,6 +18,9 @@
         <version>2.1.1.RELEASE</version>
     </parent>
 
+    <properties>
+        <docker.image.prefix>inson-pay</docker.image.prefix>
+    </properties>
 
     <dependencies>
         <dependency>
@@ -130,6 +133,24 @@
                     <testFailureIgnore>true</testFailureIgnore>
                 </configuration>
             </plugin>
+
+            <plugin>
+                <groupId>com.spotify</groupId>
+                <artifactId>docker-maven-plugin</artifactId>
+                <version>0.4.13</version>
+                <configuration>
+                    <imageName>${docker.image.prefix}/${project.artifactId}</imageName>
+                    <dockerDirectory>src/main/docker</dockerDirectory>
+                    <forceTags>true</forceTags>
+                    <resources>
+                        <resource>
+                            <targetPath>/</targetPath>
+                            <directory>${project.build.directory}</directory>
+                        </resource>
+                    </resources>
+                </configuration>
+            </plugin>
+
         </plugins>
     </build>
 
